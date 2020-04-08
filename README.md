@@ -6,7 +6,7 @@ Trivia App
 ### App Packages:
 
 - activity: all activity of project.
-- adapter: home page adapter.
+- adapter: game adapter.
 - database: database files.
 - model: all model class of project.
 - utils: files which can be used in entire project.
