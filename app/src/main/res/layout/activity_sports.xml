@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.SportsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -15,39 +15,56 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/gl_25"/>
 
     <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:padding="8dp"
         android:layout_marginStart="8dp"
-        android:text="@string/your_name"
+        android:padding="8dp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="@string/best_cricketer"
+        android:id="@+id/tv_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_25" />
+        app:layout_constraintTop_toBottomOf="@id/gl_25"/>
 
-    <EditText
-        android:id="@+id/et_name"
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@null"
-        android:hint="@string/name"
-        android:textColor="@android:color/black"
-        android:inputType="text"
-        android:padding="8dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        android:id="@+id/rg_cricket">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sachin_tendulkar"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/virat_kolli"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adam_gilchirst"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jacques_kallis"/>
+
+    </RadioGroup>
+
 
     <Button
         android:id="@+id/btn_next"
@@ -60,6 +77,6 @@
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_name" />
+        app:layout_constraintTop_toBottomOf="@id/rg_cricket" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
