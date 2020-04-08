@@ -10,7 +10,7 @@ Trivia App
 - database: database files.
 - model: all model class of project.
 - utils: files which can be used in entire project.
-- 
+ 
 Screenshot
 ----
 
