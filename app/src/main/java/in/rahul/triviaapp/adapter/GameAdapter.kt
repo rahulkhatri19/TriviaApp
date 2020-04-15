@@ -1,7 +1,7 @@
 package `in`.rahul.triviaapp.adapter
 
 import `in`.rahul.triviaapp.R
-import `in`.rahul.triviaapp.model.TriviaModel
+import `in`.rahul.triviaapp.core.domain.TriviaModel
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

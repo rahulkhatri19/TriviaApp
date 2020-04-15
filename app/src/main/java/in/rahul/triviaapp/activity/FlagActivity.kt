@@ -13,7 +13,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.log
 
 class FlagActivity : AppCompatActivity() {
 
@@ -64,7 +63,14 @@ class FlagActivity : AppCompatActivity() {
                 val simpleDateFormat = SimpleDateFormat("dd MMM hh:mm a", Locale.ENGLISH)
                 val stDate = simpleDateFormat.format(calendar.time)
                 logMessage("Flag","list: $flagList, date:$stDate")
-                val triviaData = TriviaData(null, stDate, stUserName, stSportsMan, stFlag)
+                val triviaData =
+                    TriviaData(
+                        null,
+                        stDate,
+                        stUserName,
+                        stSportsMan,
+                        stFlag
+                    )
                 insertIntoDatabase(triviaData)
                 startActivity(Intent(this, SummaryActivity::class.java).putExtras(bundle))
                 finish()

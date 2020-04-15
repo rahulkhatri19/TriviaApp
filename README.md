@@ -43,4 +43,7 @@ Screenshot
 </table>
 
 ### Credits:
-App Logo/Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+- App Logo/Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
+- [Clean Architecture Tutorial for Android: Getting Started](https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started)
+- [Mvvm With Databinding](https://www.raywenderlich.com/636803-mvvm-and-databinding-android-design-patterns)

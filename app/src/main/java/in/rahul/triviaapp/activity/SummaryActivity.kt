@@ -3,7 +3,7 @@ package `in`.rahul.triviaapp.activity
 import `in`.rahul.triviaapp.R
 import `in`.rahul.triviaapp.adapter.GameAdapter
 import `in`.rahul.triviaapp.database.TriviaDatabase
-import `in`.rahul.triviaapp.model.TriviaModel
+import `in`.rahul.triviaapp.core.domain.TriviaModel
 import `in`.rahul.triviaapp.utils.CommonUtils.showMessage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class SummaryActivity : AppCompatActivity() {
 
-   lateinit var database:TriviaDatabase
+   lateinit var database: TriviaDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
@@ -53,7 +53,15 @@ class SummaryActivity : AppCompatActivity() {
                 showMessage(this@SummaryActivity, "No Database Found")
             } else {
                 for (i in triviaDataList.indices){
-                    triviaModelList.add(TriviaModel(triviaDataList[i].id, triviaDataList[i].date, triviaDataList[i].userName, triviaDataList[i].sportsMan, triviaDataList[i].flag))
+                    triviaModelList.add(
+                        TriviaModel(
+                            triviaDataList[i].id,
+                            triviaDataList[i].date,
+                            triviaDataList[i].userName,
+                            triviaDataList[i].sportsMan,
+                            triviaDataList[i].flag
+                        )
+                    )
                 }
 
                 runOnUiThread {
