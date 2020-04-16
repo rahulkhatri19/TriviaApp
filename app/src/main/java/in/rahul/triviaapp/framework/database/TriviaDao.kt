@@ -1,4 +1,4 @@
-package `in`.rahul.triviaapp.database
+package `in`.rahul.triviaapp.framework.database
 
 import androidx.room.Dao
 import androidx.room.Insert

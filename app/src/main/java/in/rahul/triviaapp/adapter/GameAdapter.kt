@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.game_layout.view.*
 
-class GameAdapter(val context: Context, val gameList:MutableList<TriviaModel>): RecyclerView.Adapter<GameAdapter.ViewHolder>() {
+class GameAdapter(var gameList: List<TriviaModel>): RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
+//   private var gameList: MutableList<TriviaModel> = mutableListOf()
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val tvGameId = view.tv_game
         val tvDate = view.tv_date
@@ -20,7 +21,7 @@ class GameAdapter(val context: Context, val gameList:MutableList<TriviaModel>): 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.game_layout, parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.game_layout, parent,false)
         return ViewHolder(view)
     }
 
@@ -36,4 +37,8 @@ class GameAdapter(val context: Context, val gameList:MutableList<TriviaModel>): 
         holder.tvCricketer.text = listItem.cricketer
         holder.tvFlag.text = listItem.flag
     }
+
+//    fun setGameList(gameDataList: MutableList<TriviaModel>){
+//        gameList = gameDataList
+//    }
 }

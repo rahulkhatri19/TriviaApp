@@ -42,8 +42,19 @@ Screenshot
   </tr>
 </table>
 
+Clean Arch pattern:
+
+- core package: This package contain file
+  - data : repository section
+  - domain: Model class of project
+  - interactor: function/features of the project
+
 ### Credits:
 - App Logo/Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 - [Clean Architecture Tutorial for Android: Getting Started](https://www.raywenderlich.com/3595916-clean-architecture-tutorial-for-android-getting-started)
 - [Mvvm With Databinding](https://www.raywenderlich.com/636803-mvvm-and-databinding-android-design-patterns)
+- [github code](https://github.com/sabiou/starter-clean-architecture)
+- [mvvm-architecture-viewmodel-and-livedata](https://proandroiddev.com/mvvm-architecture-viewmodel-and-livedata-part-1-604f50cda1)
+- [mvvvm github sample](https://github.com/hazems/mvvm-sample-app)
+- [view model offical doc](https://developer.android.com/topic/libraries/architecture/viewmodel)

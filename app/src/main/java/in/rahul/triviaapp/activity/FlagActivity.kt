@@ -1,8 +1,8 @@
 package `in`.rahul.triviaapp.activity
 
 import `in`.rahul.triviaapp.R
-import `in`.rahul.triviaapp.database.TriviaData
-import `in`.rahul.triviaapp.database.TriviaDatabase
+import `in`.rahul.triviaapp.framework.database.TriviaData
+import `in`.rahul.triviaapp.framework.database.TriviaDatabase
 import `in`.rahul.triviaapp.utils.CommonUtils.logMessage
 import `in`.rahul.triviaapp.utils.CommonUtils.showMessage
 import android.content.Intent

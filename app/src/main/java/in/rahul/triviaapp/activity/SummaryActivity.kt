@@ -2,12 +2,18 @@ package `in`.rahul.triviaapp.activity
 
 import `in`.rahul.triviaapp.R
 import `in`.rahul.triviaapp.adapter.GameAdapter
-import `in`.rahul.triviaapp.database.TriviaDatabase
+import `in`.rahul.triviaapp.framework.database.TriviaDatabase
 import `in`.rahul.triviaapp.core.domain.TriviaModel
+import `in`.rahul.triviaapp.framework.RoomDbTriviaDataSource
+import `in`.rahul.triviaapp.framework.TriviaViewModelFactory
+import `in`.rahul.triviaapp.presentation.GameDelegate
+import `in`.rahul.triviaapp.presentation.GameViewModel
 import `in`.rahul.triviaapp.utils.CommonUtils.showMessage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_summary.*
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +21,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class SummaryActivity : AppCompatActivity() {
+
+    private lateinit var viewModel:GameViewModel
+    lateinit var gameDelegate: GameDelegate
 
    lateinit var database: TriviaDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +34,30 @@ class SummaryActivity : AppCompatActivity() {
             finish()
         }
         database = TriviaDatabase.getInstance(this)!!
+
+
+
+//         val adapter = DocumentsAdapter(glide = Glide.with(this)) {
+//        mainActivityDelegate.openDocument(it)
+//    }
+//    documentsRecyclerView.adapter = adapter
+//
+//    viewModel = ViewModelProviders.of(this, MajesticViewModelFactory)
+//        .get(LibraryViewModel::class.java)
+//    viewModel.documents.observe(this, Observer { adapter.update(it) })
+//    viewModel.loadDocuments()
+
+//        val adapter = GameAdapter()
+        /* {
+                viewModel.getTriviaData()
+        }*/
+//        adapter.setGameList()
+
+
+        viewModel = ViewModelProviders.of(this, TriviaViewModelFactory).get(GameViewModel::class.java)
+//        viewModel.triviaList.observe(this, Observer { adapter.update(it) })
+
+
         recycle_view.visibility = View.GONE
         cl_summary.visibility = View.VISIBLE
         val stUserName = intent.getStringExtra("userName")
@@ -40,6 +73,7 @@ class SummaryActivity : AppCompatActivity() {
             finish()
         }
         btn_history.setOnClickListener {
+           val data = viewModel.getTriviaData()
             fetchDataFmDatabase()
         }
     }
@@ -47,6 +81,7 @@ class SummaryActivity : AppCompatActivity() {
     private fun fetchDataFmDatabase() {
         GlobalScope.launch(Dispatchers.IO) {
             val triviaDataList = database.triviaDao().getAllData()
+            val datalist = RoomDbTriviaDataSource(this@SummaryActivity).readAllData()
             val triviaModelList = mutableListOf<TriviaModel>()
 
             if (triviaDataList == null || triviaDataList.size == 0){
@@ -67,8 +102,9 @@ class SummaryActivity : AppCompatActivity() {
                 runOnUiThread {
                     cl_summary.visibility = View.GONE
                     recycle_view.layoutManager = LinearLayoutManager(this@SummaryActivity, LinearLayoutManager.VERTICAL, false)
-                    recycle_view.adapter = GameAdapter(this@SummaryActivity, triviaModelList)
-                    recycle_view.visibility = View.VISIBLE
+//                    recycle_view.adapter = GameAdapter(this@SummaryActivity, triviaModelList)
+                    recycle_view.adapter = GameAdapter(datalist)
+                        recycle_view.visibility = View.VISIBLE
                 }
             }
         }
@@ -86,7 +122,6 @@ class SummaryActivity : AppCompatActivity() {
         }
         ab?.setDisplayHomeAsUpEnabled(true)
     }
-
     override fun onBackPressed() {
         finish()
         super.onBackPressed()
