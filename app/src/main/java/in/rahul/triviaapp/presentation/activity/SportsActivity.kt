@@ -1,7 +1,6 @@
-package `in`.rahul.triviaapp.activity
+package `in`.rahul.triviaapp.presentation.activity
 
 import `in`.rahul.triviaapp.R
-import `in`.rahul.triviaapp.utils.CommonUtils.logMessage
 import `in`.rahul.triviaapp.utils.CommonUtils.showMessage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

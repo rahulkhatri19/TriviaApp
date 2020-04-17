@@ -1,14 +1,12 @@
-package `in`.rahul.triviaapp.activity
+package `in`.rahul.triviaapp.presentation.activity
 
 import `in`.rahul.triviaapp.R
-import `in`.rahul.triviaapp.adapter.GameAdapter
+import `in`.rahul.triviaapp.presentation.adapter.GameAdapter
 import `in`.rahul.triviaapp.framework.database.TriviaDatabase
-import `in`.rahul.triviaapp.core.domain.TriviaModel
-import `in`.rahul.triviaapp.framework.RoomDbTriviaDataSource
 import `in`.rahul.triviaapp.framework.TriviaViewModelFactory
 import `in`.rahul.triviaapp.presentation.GameDelegate
 import `in`.rahul.triviaapp.presentation.GameViewModel
-import `in`.rahul.triviaapp.utils.CommonUtils.showMessage
+import `in`.rahul.triviaapp.utils.CommonUtils.logMessage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,9 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_summary.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class SummaryActivity : AppCompatActivity() {
 
@@ -55,8 +50,6 @@ class SummaryActivity : AppCompatActivity() {
 
 
         viewModel = ViewModelProviders.of(this, TriviaViewModelFactory).get(GameViewModel::class.java)
-//        viewModel.triviaList.observe(this, Observer { adapter.update(it) })
-
 
         recycle_view.visibility = View.GONE
         cl_summary.visibility = View.VISIBLE
@@ -73,12 +66,33 @@ class SummaryActivity : AppCompatActivity() {
             finish()
         }
         btn_history.setOnClickListener {
-           val data = viewModel.getTriviaData()
-            fetchDataFmDatabase()
+            viewModel.triviaList.observe(this, Observer {
+//                logMessage("Summ Act", ":${it}")
+                cl_summary.visibility = View.GONE
+                recycle_view.layoutManager = LinearLayoutManager(this@SummaryActivity, LinearLayoutManager.VERTICAL, false)
+//                    recycle_view.adapter = GameAdapter(this@SummaryActivity, triviaModelList)
+                recycle_view.adapter = GameAdapter(it)
+                recycle_view.visibility = View.VISIBLE
+            })
+            viewModel.getTriviaData()
+
+//            GlobalScope.launch(Dispatchers.IO){
+//                val datalist = RoomDbTriviaDataSource(this@SummaryActivity).readAllData()
+//
+//                runOnUiThread {
+//                    cl_summary.visibility = View.GONE
+//                    recycle_view.layoutManager = LinearLayoutManager(this@SummaryActivity, LinearLayoutManager.VERTICAL, false)
+////                    recycle_view.adapter = GameAdapter(this@SummaryActivity, triviaModelList)
+//                    recycle_view.adapter = GameAdapter(datalist)
+//                    recycle_view.visibility = View.VISIBLE
+//                }
+//            }
+
+//            fetchDataFmDatabase()
         }
     }
 
-    private fun fetchDataFmDatabase() {
+  /*  private fun fetchDataFmDatabase() {
         GlobalScope.launch(Dispatchers.IO) {
             val triviaDataList = database.triviaDao().getAllData()
             val datalist = RoomDbTriviaDataSource(this@SummaryActivity).readAllData()
@@ -108,7 +122,7 @@ class SummaryActivity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
     override fun onDestroy() {
         TriviaDatabase.destroyInstance()

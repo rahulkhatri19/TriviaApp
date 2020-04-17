@@ -1,4 +1,4 @@
-package `in`.rahul.triviaapp.activity
+package `in`.rahul.triviaapp.presentation.activity
 
 import `in`.rahul.triviaapp.R
 import android.content.Intent

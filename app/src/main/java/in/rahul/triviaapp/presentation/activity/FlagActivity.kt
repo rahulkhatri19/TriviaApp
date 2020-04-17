@@ -1,13 +1,17 @@
-package `in`.rahul.triviaapp.activity
+package `in`.rahul.triviaapp.presentation.activity
 
 import `in`.rahul.triviaapp.R
+import `in`.rahul.triviaapp.core.domain.TriviaModel
+import `in`.rahul.triviaapp.framework.TriviaViewModelFactory
 import `in`.rahul.triviaapp.framework.database.TriviaData
 import `in`.rahul.triviaapp.framework.database.TriviaDatabase
+import `in`.rahul.triviaapp.presentation.GameViewModel
 import `in`.rahul.triviaapp.utils.CommonUtils.logMessage
 import `in`.rahul.triviaapp.utils.CommonUtils.showMessage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_flag.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -16,6 +20,7 @@ import java.util.*
 
 class FlagActivity : AppCompatActivity() {
 
+    lateinit var viewModel:GameViewModel
     lateinit var database: TriviaDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +30,7 @@ class FlagActivity : AppCompatActivity() {
             finish()
         }
         database = TriviaDatabase.getInstance(this)!!
+        viewModel = ViewModelProviders.of(this, TriviaViewModelFactory).get(GameViewModel::class.java)
         btn_next.setOnClickListener {
 
             val cbWhite = cb_white.isChecked
@@ -63,15 +69,17 @@ class FlagActivity : AppCompatActivity() {
                 val simpleDateFormat = SimpleDateFormat("dd MMM hh:mm a", Locale.ENGLISH)
                 val stDate = simpleDateFormat.format(calendar.time)
                 logMessage("Flag","list: $flagList, date:$stDate")
-                val triviaData =
-                    TriviaData(
-                        null,
-                        stDate,
-                        stUserName,
-                        stSportsMan,
-                        stFlag
-                    )
-                insertIntoDatabase(triviaData)
+                val triviaModel = TriviaModel(null,   stDate, stUserName, stSportsMan, stFlag)
+                viewModel.addTriviaData(triviaModel)
+//                val triviaData =
+//                    TriviaData(
+//                        null,
+//                        stDate,
+//                        stUserName,
+//                        stSportsMan,
+//                        stFlag
+//                    )
+//                insertIntoDatabase(triviaData)
                 startActivity(Intent(this, SummaryActivity::class.java).putExtras(bundle))
                 finish()
 

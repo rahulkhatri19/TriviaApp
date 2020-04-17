@@ -18,7 +18,7 @@ class GameViewModel(application: Application, interactor: Interactors) :
 
     private val viewModelJob = Job()
 
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
 
     val triviaList: MutableLiveData<List<TriviaModel>> = MutableLiveData()
 
