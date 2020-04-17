@@ -49,6 +49,10 @@ Clean Arch pattern:
   - domain: Model class of project
   - interactor: function/features of the project
 
+- framework package: This project contain database files and files to connect core package to project.
+
+- presentation package: This package contain all the view and viewmodel related files.
+
 ### Credits:
 - App Logo/Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
